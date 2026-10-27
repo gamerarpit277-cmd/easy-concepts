@@ -200,24 +200,6 @@ const steps = [
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-    <h2 class="text-center font-display text-3xl font-semibold tracking-tight text-navy-900 sm:text-4xl">Frequently asked questions</h2>
-    <div class="mt-10 divide-y divide-ink/10 rounded-2xl border border-ink/5 bg-white px-6 shadow-sm">
-      {
-        faqs.map((f) => (
-          <details class="group py-5">
-            <summary class="flex cursor-pointer list-none items-center justify-between font-semibold text-navy-900">
-              {f.q}
-              <span class="ml-4 text-xl text-saffron-600 transition group-open:rotate-45">+</span>
-            </summary>
-            <p class="mt-3 text-ink/70">{f.a}</p>
-          </details>
-        ))
-      }
-    </div>
-  </section>
-
   <!-- Location -->
   <section class="mx-auto max-w-7xl px-4 sm:px-6">
     <div class="grid overflow-hidden rounded-3xl border border-ink/5 bg-white shadow-sm lg:grid-cols-5">
@@ -242,4 +224,22 @@ const steps = [
   </section>
 
   <CtaBand />
+
+  <!-- FAQ -->
+  <section class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+    <h2 class="text-center font-display text-3xl font-semibold tracking-tight text-navy-900 sm:text-4xl">Frequently asked questions</h2>
+    <div class="mt-10 divide-y divide-ink/10 rounded-2xl border border-ink/5 bg-white px-6 shadow-sm">
+      {
+        faqs.map((f) => (
+          <details class="group py-5">
+            <summary class="flex cursor-pointer list-none items-center justify-between font-semibold text-navy-900">
+              {f.q}
+              <span class="ml-4 text-xl text-saffron-600 transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-3 text-ink/70">{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
 </Layout>
