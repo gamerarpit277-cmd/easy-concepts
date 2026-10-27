@@ -1,0 +1,20 @@
+---
+interface Props {
+  light?: boolean;
+}
+const { light = false } = Astro.props;
+---
+
+<span class="flex items-center gap-2.5">
+  <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-800 text-saffron-400 shadow-sm">
+    <svg viewBox="0 0 32 32" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M16 5c-4.4 0-8 3.4-8 7.6 0 2.6 1.4 4.6 3.2 6 .9.7 1.4 1.6 1.4 2.6V23h6.8v-1.8c0-1 .5-1.9 1.4-2.6 1.8-1.4 3.2-3.4 3.2-6C24 8.4 20.4 5 16 5z"></path>
+      <path d="M13 27h6"></path>
+      <path d="M13.5 13l2 2 3-3.5" stroke="#fff"></path>
+    </svg>
+  </span>
+  <span class="leading-tight">
+    <span class:list={["block font-display text-xl font-semibold tracking-tight", light ? "text-white" : "text-navy-900"]}>Easy Concepts</span>
+    <span class:list={["block text-[11px] font-medium tracking-wide uppercase", light ? "text-navy-100" : "text-ink/50"]}>Coaching Institute · Matiala</span>
+  </span>
+</span>

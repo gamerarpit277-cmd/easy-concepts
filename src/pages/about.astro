@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import ReviewCard from "../components/ReviewCard.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { site, reviews, reviewTags } from "../data/site";
+
+const values = [
+  { title: "Clarity over cramming", text: "We teach the reasoning behind every formula so students can solve problems they’ve never seen." },
+  { title: "Care for every child", text: "Teachers take time to understand each student’s difficulties and clear doubts actively." },
+  { title: "Great results, greater humans", text: "Alongside marks, we nurture discipline, curiosity and kindness." },
+];
+---
+
+<Layout title="About — Easy Concepts, Matiala" description="Easy Concepts is a women-led coaching institute in Matiala, Delhi, known for experienced faculty and a supportive learning environment.">
+  <PageHero
+    eyebrow="About us"
+    title="A neighbourhood institute with a simple promise: make concepts easy."
+    text="Easy Concepts (ईजी कॉन्सेप्ट्स) is a women-owned coaching centre on Matiyala Main Road, trusted by families across Matiala and Sukh Ram Park."
+  />
+
+  <section class="mx-auto grid max-w-7xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-2">
+    <img
+      src="https://images.unsplash.com/flagged/photo-1574097656146-0b43b7660cb6?auto=format&fit=crop&w=1100&q=75"
+      alt="A curious young student in class"
+      loading="lazy"
+      class="aspect-[4/3] w-full rounded-3xl object-cover shadow-xl"
+      width="1100"
+      height="825"
+    />
+    <div>
+      <h2 class="font-display text-3xl font-semibold text-navy-900">Our story</h2>
+      <div class="mt-5 space-y-4 text-ink/70">
+        <p>
+          Easy Concepts began with a belief that every child can do well when a subject is explained patiently and clearly.
+          Our name is our method — break each topic down until it feels easy.
+        </p>
+        <p>
+          Today the institute is one of the best-reviewed coaching centres in the area, with a perfect
+          <strong class="text-ink">{site.rating.toFixed(1)}★ rating from {site.reviewCount} Google reviews</strong>. Parents describe a
+          “structured and supportive learning environment” and teachers who are “humble and gentle”.
+        </p>
+        <p>As a women-led institute, we take special pride in creating a safe, encouraging space for every student.</p>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-2">
+        {reviewTags.map((t) => <span class="rounded-full border border-ink/10 bg-white px-4 py-2 text-sm"><strong class="text-navy-700">{t.label}</strong> · mentioned {t.count}×</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy-800 py-20 text-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="font-display text-3xl font-semibold">What we stand for</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {
+          values.map((v, i) => (
+            <div class="reveal rounded-2xl bg-white/5 p-7 ring-1 ring-white/10">
+              <span class="font-display text-4xl font-semibold text-saffron-400">0{i + 1}</span>
+              <h3 class="mt-4 text-lg font-semibold">{v.title}</h3>
+              <p class="mt-2 text-sm text-navy-100">{v.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <h2 class="font-display text-3xl font-semibold text-navy-900">In their words</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {reviews.map((r) => <ReviewCard {...r} />)}
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

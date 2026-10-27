@@ -1,0 +1,62 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { courses } from "../data/site";
+
+const included = [
+  "Concept-first classroom teaching",
+  "Chapter-wise notes & worksheets",
+  "Dedicated doubt-clearing time",
+  "Regular tests with written feedback",
+  "Parent progress updates",
+  "Exam & board-pattern practice",
+];
+---
+
+<Layout title="Courses — Easy Concepts, Matiala" description="Coaching programs at Easy Concepts for Classes 1–12: Foundation, Middle School, CBSE Board Excellence and Senior Secondary.">
+  <PageHero
+    eyebrow="Courses"
+    title="Programs built around how your child learns"
+    text="From first steps in Class 1 to board exams in Class 12, every batch is small, structured and taught by experienced, supportive faculty."
+  />
+
+  <section class="mx-auto max-w-7xl space-y-10 px-4 py-20 sm:px-6">
+    {
+      courses.map((c, i) => (
+        <article id={c.slug} class="reveal grid scroll-mt-28 items-center gap-8 overflow-hidden rounded-3xl border border-ink/5 bg-white shadow-sm lg:grid-cols-2">
+          <img src={c.img} alt="" loading="lazy" class:list={["h-full max-h-96 w-full object-cover", i % 2 === 1 && "lg:order-2"]} width="900" height="563" />
+          <div class="p-8 sm:p-10">
+            <p class="text-sm font-semibold tracking-widest text-saffron-600 uppercase">{c.level}</p>
+            <h2 class="mt-2 font-display text-3xl font-semibold text-navy-900">{c.title}</h2>
+            <p class="mt-4 text-ink/70">{c.blurb}</p>
+            <div class="mt-6 flex flex-wrap gap-2">
+              {c.subjects.map((s) => <span class="rounded-full bg-navy-50 px-3 py-1 text-sm font-medium text-navy-700">{s}</span>)}
+            </div>
+            <a href={`/contact?course=${encodeURIComponent(c.title)}#enquiry`} class="mt-8 inline-block rounded-full bg-navy-800 px-6 py-3 text-sm font-semibold text-white hover:bg-navy-700">
+              Enquire about this program
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="bg-navy-50/60 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="font-display text-3xl font-semibold text-navy-900">Included in every program</h2>
+      <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          included.map((item) => (
+            <li class="flex items-center gap-3 rounded-xl bg-white p-5 shadow-sm">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-saffron-100 text-saffron-600">✓</span>
+              <span class="font-medium">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

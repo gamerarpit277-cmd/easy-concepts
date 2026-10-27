@@ -1,0 +1,46 @@
+---
+import { nav, site, courses } from "../data/site";
+import Logo from "./Logo.astro";
+---
+
+<footer class="bg-navy-900 text-navy-100">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
+    <div class="lg:col-span-1">
+      <Logo light />
+      <p class="mt-4 text-sm leading-relaxed text-navy-100/80">
+        A women-led coaching centre in Matiala, Delhi, helping students from Class 1 to 12 understand — not memorise.
+      </p>
+      <p class="mt-4 text-sm"><span class="text-saffron-400">★★★★★</span> {site.rating.toFixed(1)} · {site.reviewCount} Google reviews</p>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-semibold tracking-wide text-white uppercase">Explore</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        {nav.map((n) => <li><a href={n.href} class="hover:text-saffron-400">{n.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-semibold tracking-wide text-white uppercase">Programs</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        {courses.map((c) => <li><a href={`/courses#${c.slug}`} class="hover:text-saffron-400">{c.title} <span class="text-navy-100/50">· {c.level}</span></a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-semibold tracking-wide text-white uppercase">Visit us</h3>
+      <address class="mt-4 space-y-2 text-sm not-italic">
+        <p>{site.address.line1}<br />{site.address.line2}</p>
+        <p><a href={site.phoneHref} class="font-semibold text-white hover:text-saffron-400">{site.phoneDisplay}</a></p>
+        <p>{site.hours}</p>
+        <p><a href={site.mapsUrl} target="_blank" rel="noopener" class="text-saffron-400 hover:underline">Get directions →</a></p>
+      </address>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-navy-100/60 sm:flex-row sm:justify-between sm:px-6">
+      <p>© {new Date().getFullYear()} Easy Concepts. All rights reserved.</p>
+      <p>Photos via <a href="https://unsplash.com" class="underline hover:text-white" target="_blank" rel="noopener">Unsplash</a></p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+
+  --color-ink: #0f1b2d;
+  --color-navy-50: #eef3fa;
+  --color-navy-100: #d9e3f2;
+  --color-navy-600: #1f4b8f;
+  --color-navy-700: #173a72;
+  --color-navy-800: #112c57;
+  --color-navy-900: #0b1f3f;
+  --color-saffron-50: #fff7ea;
+  --color-saffron-100: #ffeac7;
+  --color-saffron-400: #f7b23b;
+  --color-saffron-500: #ee9a12;
+  --color-saffron-600: #cf7c06;
+  --color-paper: #fbf9f4;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper font-sans text-ink antialiased;
+}
+
+/* Notebook-grid texture used behind hero and CTA blocks */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(15 27 45 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(15 27 45 / 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-grid-light {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Hand-drawn marker underline for key words in headings */
+.marker {
+  background-image: linear-gradient(transparent 62%, var(--color-saffron-400) 62%, var(--color-saffron-400) 88%, transparent 88%);
+  padding: 0 0.1em;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}

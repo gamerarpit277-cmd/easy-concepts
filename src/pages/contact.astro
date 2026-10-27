@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import { site, courses } from "../data/site";
+---
+
+<Layout title="Contact & Admissions — Easy Concepts, Matiala" description="Book a free demo class at Easy Concepts, Matiala, Delhi. Call +91 80932 14651 or send an enquiry on WhatsApp.">
+  <PageHero
+    eyebrow="Contact & admissions"
+    title="Book a free demo class"
+    text="Tell us a little about your child and we’ll get back to you on WhatsApp with batch timings and fees."
+  />
+
+  <section class="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-5">
+    <form id="enquiry" class="scroll-mt-28 rounded-3xl border border-ink/5 bg-white p-7 shadow-sm sm:p-10 lg:col-span-3" data-wa={site.whatsapp}>
+      <h2 class="font-display text-2xl font-semibold text-navy-900">Admission enquiry</h2>
+      <div class="mt-8 grid gap-5 sm:grid-cols-2">
+        <label class="block">
+          <span class="text-sm font-medium">Parent / student name</span>
+          <input name="name" required class="mt-1.5 w-full rounded-xl border border-ink/15 bg-paper px-4 py-3 outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/20" />
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium">Phone number</span>
+          <input name="phone" type="tel" required pattern="[0-9+ ]{10,14}" class="mt-1.5 w-full rounded-xl border border-ink/15 bg-paper px-4 py-3 outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/20" />
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium">Class</span>
+          <select name="grade" required class="mt-1.5 w-full rounded-xl border border-ink/15 bg-paper px-4 py-3 outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/20">
+            <option value="">Select class</option>
+            {Array.from({ length: 12 }, (_, i) => <option>Class {i + 1}</option>)}
+          </select>
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium">Program</span>
+          <select name="course" class="mt-1.5 w-full rounded-xl border border-ink/15 bg-paper px-4 py-3 outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/20">
+            <option value="">Not sure yet</option>
+            {courses.map((c) => <option>{c.title}</option>)}
+          </select>
+        </label>
+        <label class="block sm:col-span-2">
+          <span class="text-sm font-medium">Message (optional)</span>
+          <textarea name="message" rows="4" class="mt-1.5 w-full rounded-xl border border-ink/15 bg-paper px-4 py-3 outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/20"></textarea>
+        </label>
+      </div>
+      <button type="submit" class="mt-8 w-full rounded-full bg-saffron-500 px-7 py-4 font-semibold text-ink transition hover:bg-saffron-400 sm:w-auto">
+        Send enquiry on WhatsApp
+      </button>
+      <p class="mt-3 text-xs text-ink/50">Opens WhatsApp with your details pre-filled. Nothing is stored on this website.</p>
+    </form>
+
+    <aside class="space-y-5 lg:col-span-2">
+      <a href={site.phoneHref} class="flex items-center gap-4 rounded-2xl bg-navy-800 p-6 text-white transition hover:bg-navy-700">
+        <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-2xl">📞</span>
+        <span><span class="block text-sm text-navy-100">Call us</span><span class="block text-lg font-semibold">{site.phoneDisplay}</span></span>
+      </a>
+      <div class="rounded-2xl border border-ink/5 bg-white p-6 shadow-sm">
+        <h3 class="font-semibold">Address</h3>
+        <p class="mt-1 text-ink/70">{site.address.line1}<br />{site.address.line2}</p>
+        <p class="mt-1 text-sm text-ink/50">Plus code: {site.address.plusCode}</p>
+        <h3 class="mt-5 font-semibold">Hours</h3>
+        <p class="mt-1 text-ink/70">{site.hours}</p>
+        <a href={site.mapsUrl} target="_blank" rel="noopener" class="mt-5 inline-block font-semibold text-navy-700 hover:underline">Open in Google Maps →</a>
+      </div>
+      <iframe title="Easy Concepts location map" src={site.mapsEmbed} class="h-72 w-full rounded-2xl border-0 shadow-sm" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </aside>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById("enquiry") as HTMLFormElement | null;
+  const preset = new URLSearchParams(location.search).get("course");
+  if (form && preset) (form.elements.namedItem("course") as HTMLSelectElement).value = preset;
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const d = new FormData(form);
+    const lines = [
+      "Hello Easy Concepts! I'd like to book a free demo class.",
+      `Name: ${d.get("name")}`,
+      `Phone: ${d.get("phone")}`,
+      `Class: ${d.get("grade")}`,
+      d.get("course") ? `Program: ${d.get("course")}` : "",
+      d.get("message") ? `Message: ${d.get("message")}` : "",
+    ].filter(Boolean);
+    window.open(`https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
+  });
+</script>
